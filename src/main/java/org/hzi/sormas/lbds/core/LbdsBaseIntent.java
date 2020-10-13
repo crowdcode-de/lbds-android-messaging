@@ -9,20 +9,17 @@ import java.util.UUID;
 
 public class LbdsBaseIntent extends android.content.Intent {
 
-    protected  LbdsBaseIntent(HttpContainer container) {
+    protected  LbdsBaseIntent(HttpContainer container, String packageName) {
         super(ACTION_SEND);
-        fillIntent(container);
+        fillIntent(container, packageName);
     }
 
-    protected  LbdsBaseIntent() {
-        super(ACTION_SEND);
-    }
 
-    protected void fillIntent(HttpContainer container) {
+    protected void fillIntent(HttpContainer container, String packageName) {
         final String httpContainer = serializePackedHttpContainer(container);
         putExtra("httpContainer", httpContainer);
         setType("application/json");
-        setClassName(this.getClass().getPackage().getName(), this.getClass().getName());
+        setClassName(packageName, this.getClass().getName());
     }
 
     public HttpContainer getHttpContainer() {

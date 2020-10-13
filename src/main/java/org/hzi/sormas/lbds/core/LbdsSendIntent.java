@@ -8,13 +8,15 @@ import static org.hzi.sormas.lbds.core.http.HttpContainer.serializePackedHttpCon
 
 public class LbdsSendIntent extends LbdsBaseIntent {
 
+    public static final String LBDS_SERVICE_APP_PCKG="org.hzi.sormas.lbds.lbds_service_app";
+
     public LbdsSendIntent(HttpMethod method) {
-        super(new HttpContainer(method));
+        super(new HttpContainer(method), LBDS_SERVICE_APP_PCKG);
     }
 
 
     public LbdsSendIntent(HttpContainer container) {
-        super(container);
+        super(container, LBDS_SERVICE_APP_PCKG);
     }
 
     public HttpMethod getHttpMethod(){
