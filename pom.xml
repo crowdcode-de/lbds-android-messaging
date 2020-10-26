@@ -55,6 +55,7 @@
             <groupId>com.google.android</groupId>
             <artifactId>android</artifactId>
             <version>4.1.1.4</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.hzi.sormas.lbds</groupId>

@@ -1,25 +1,30 @@
 package org.hzi.sormas.lbds.core;
 
+import android.content.Context;
 import org.hzi.sormas.lbds.core.http.HttpContainer;
-import org.hzi.sormas.lbds.core.http.HttpMethod;
 
 import static org.hzi.sormas.lbds.core.http.HttpContainer.deserializePackedHttpContainer;
 import static org.hzi.sormas.lbds.core.http.HttpContainer.serializePackedHttpContainer;
-import java.util.UUID;
 
 public class LbdsBaseIntent extends android.content.Intent {
 
-    protected  LbdsBaseIntent(HttpContainer container, String packageName) {
+
+//    public LbdsBaseIntent(Context packageContext, java.lang.Class<?> cls, HttpContainer container) {
+//        super(packageContext, cls);
+//        setAction(ACTION_SEND);
+//        fillIntent(container);
+//    }
+
+    protected  LbdsBaseIntent(HttpContainer container) {
         super(ACTION_SEND);
-        fillIntent(container, packageName);
+        fillIntent(container);
     }
 
 
-    protected void fillIntent(HttpContainer container, String packageName) {
+    protected void fillIntent(HttpContainer container) {
         final String httpContainer = serializePackedHttpContainer(container);
         putExtra("httpContainer", httpContainer);
         setType("application/json");
-        setClassName(packageName, this.getClass().getName());
     }
 
     public HttpContainer getHttpContainer() {
