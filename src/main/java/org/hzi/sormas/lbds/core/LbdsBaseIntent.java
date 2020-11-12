@@ -1,6 +1,5 @@
 package org.hzi.sormas.lbds.core;
 
-import android.content.Context;
 import org.hzi.sormas.lbds.core.http.HttpContainer;
 
 import static org.hzi.sormas.lbds.core.http.HttpContainer.deserializePackedHttpContainer;
@@ -31,6 +30,7 @@ public class LbdsBaseIntent extends android.content.Intent {
         final String httpContainer = getStringExtra("httpContainer");
         final HttpContainer container;
 
+        
         if (httpContainer != null && !httpContainer.trim().isEmpty()) {
             container = deserializePackedHttpContainer(httpContainer);
         } else {

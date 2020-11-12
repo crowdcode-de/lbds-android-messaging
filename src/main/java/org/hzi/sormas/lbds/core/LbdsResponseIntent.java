@@ -1,9 +1,9 @@
 package org.hzi.sormas.lbds.core;
 
 import android.content.ComponentName;
-import android.content.Context;
 import org.hzi.sormas.lbds.core.http.HttpContainer;
 import org.hzi.sormas.lbds.core.http.HttpResult;
+
 import java.util.UUID;
 public class LbdsResponseIntent extends LbdsBaseIntent {
 

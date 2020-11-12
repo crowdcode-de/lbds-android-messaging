@@ -20,3 +20,61 @@ The component is built with maven
 There is a profile for each operating system in the pom.xml. You may add a profile for your needs.
 Or you modify the path matching the exact location of your Android SDK
 
+# Using Messaging Lib to communicate with LBDS
+
+## Configuration steps needed
+
+TODO: verify client side configuration
+
+## Program steps needed
+
+Inside an Activity or Service
+
+### Instantiate your http call
+
+`HttpMethod method = new HttpMethod(HttpMethod.MethodType.GET, "http://www.google.com");`
+
+ A very simple abstraction of the HttpMethods can be found in the lbds-http module. 
+ See https://github.com/crowdcode-de/lbds-http for details. 
+
+### Create a send intent
+
+`LbdsSendIntent sendIntent = new LbdsSendIntent(method);`
+
+### Fire the intent
+`startService(endIntent);`
+
+
+# Receiving Data from LBDS 
+
+After a request has been processed, the LBDS-Subsystem will emit an Intent for Sormas.
+This intent is named LbdsResponseIntent and it is also the location where the phsyical receiver configuration -
+ like package and app name - is configured.
+
+## Preconfiguration
+
+### android-manifest.xml
+
+A receiver for the intent must be implemented.
+
+`        <service
+             android:name=".LbdsRecevierComponent"
+             android:enabled="true"
+             android:exported="true">
+             <intent-filter>
+                 <action android:name="android.intent.action.SEND" />
+                 <category android:name="android.intent.category.DEFAULT" />
+             </intent-filter>
+         <service>` 
+         
+The current package for SORMAS has been taken from github and was set to _de.symeda.sormas.app_ - this may be subject to change
+The current Receiver Component was set to _de.symeda.sormas.app.LbdsRecevierComponent_ - this also may be subject of a change
+
+
+### Receiver implementation
+
+A receiver implementation must be located in the a.m. package and it must implement an IntentService
+
+`public class LbdsRecevierComponent extends IntentService ...`
+
+              
