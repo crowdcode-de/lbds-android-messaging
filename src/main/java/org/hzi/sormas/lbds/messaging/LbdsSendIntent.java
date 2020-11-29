@@ -1,4 +1,4 @@
-package org.hzi.sormas.lbds.core;
+package org.hzi.sormas.lbds.messaging;
 
 import org.hzi.sormas.lbds.core.http.HttpContainer;
 import org.hzi.sormas.lbds.core.http.HttpMethod;

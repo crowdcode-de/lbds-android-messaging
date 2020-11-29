@@ -1,4 +1,4 @@
-package org.hzi.sormas.lbds.core;
+package org.hzi.sormas.lbds.messaging;
 
 import java.security.PublicKey;
 
