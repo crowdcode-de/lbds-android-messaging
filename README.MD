@@ -91,6 +91,37 @@ Example:
 * This intent is consumed by LBDS, the current public key will be replaced
 * LBDS emits a LbdsPropagateKexToSormasIntent, which will contain both keys; the new SORMAS key plus the current LBDS key
 
-## To be done
+_A response intent always has both keys!_
 
-* Maybe encryption/decryption macro could be embedded into the Request/Response Intent to make encryption more easy
+## Useful to know
+
+* You may use the Constants package to differ the Intent Type
+
+```
+final String intentType = intent.getStringExtra(Constants.INTENT_TYPE);
+   if (intentType != null && !intentType.trim().isEmpty()) {
+     IntentType type = IntentType.valueOf(intentType);
+       switch (type) {
+         case HTTP_SEND_INTENT:
+           final String httpContainer = intent.getStringExtra(Constants.HTTP_CONTAINER);
+             HttpContainer container = HttpContainer.deserializePackedHttpContainer(httpContainer);
+             final HighLevelService highLevelService = ApplicationContext.getBean(HighLevelService.class);
+             final String responder = "192.168.178.23:8080";
+             final TransmissionSession session = highLevelService.submitHttpMethod(container.getMethod(), responder);
+             // ...
+             break;
+         case KEX_TO_LBDS_INTENT:
+           final String publicKey = intent.getStringExtra(Constants.SORMAS_KEY);
+           final PublicKey key = KeySerializationUtil.deserializePublicKey(publicKey);
+           //....
+           break;
+                  case HTTP_RESPONSE_INTENT:
+                      break;
+                  case KEX_TO_SORMAS_INTENT:
+                      break;
+              }
+          }
+        ....
+```
+
+## To be done
