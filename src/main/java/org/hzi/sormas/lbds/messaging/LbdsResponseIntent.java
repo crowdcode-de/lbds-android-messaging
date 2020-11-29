@@ -1,15 +1,11 @@
-package org.hzi.sormas.lbds.core;
+package org.hzi.sormas.lbds.messaging;
 
-import android.content.ComponentName;
 import org.hzi.sormas.lbds.core.http.HttpContainer;
 import org.hzi.sormas.lbds.core.http.HttpResult;
 
 import java.util.UUID;
-public class LbdsResponseIntent extends LbdsBaseIntent {
 
-    public static final String SORMAS_APP_PCK="de.symeda.sormas.app";
-    public static final String SORMAS_RECEIVER_COMPONENT="de.symeda.sormas.app.LbdsRecevierComponent";
-    public static final ComponentName componentName = new ComponentName(SORMAS_APP_PCK, SORMAS_RECEIVER_COMPONENT);
+public class LbdsResponseIntent extends LbdsBaseIntent implements SormasRelated {
 
     public LbdsResponseIntent(HttpResult result) {
         super(new HttpContainer(UUID.randomUUID(), result));
