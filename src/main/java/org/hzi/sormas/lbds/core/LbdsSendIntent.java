@@ -1,15 +1,9 @@
 package org.hzi.sormas.lbds.core;
 
-import android.content.ComponentName;
 import org.hzi.sormas.lbds.core.http.HttpContainer;
 import org.hzi.sormas.lbds.core.http.HttpMethod;
 
-public class LbdsSendIntent extends LbdsBaseIntent {
-
-    public static final String LBDS_SERVICE_APP_PCKG="org.hzi.sormas.lbds.lbds_service_app";
-    public static final String LBDS_RECEIVER_COMPONENT="org.hzi.sormas.lbds.lbds_service_app.comm.LbdsIntentService";
-
-    final ComponentName componentName = new ComponentName(LBDS_SERVICE_APP_PCKG, LBDS_RECEIVER_COMPONENT);
+public class LbdsSendIntent extends LbdsBaseIntent implements LbdsRelated {
 
     public LbdsSendIntent(HttpMethod method) {
         super(new HttpContainer(method));

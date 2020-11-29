@@ -65,7 +65,7 @@ A receiver for the intent must be implemented.
                  <action android:name="android.intent.action.SEND" />
                  <category android:name="android.intent.category.DEFAULT" />
              </intent-filter>
-         <service>` 
+         <service> `  
          
 The current package for SORMAS has been taken from github and was set to _de.symeda.sormas.app_ - this may be subject to change
 The current Receiver Component was set to _de.symeda.sormas.app.LbdsRecevierComponent_ - this also may be subject of a change
@@ -77,4 +77,20 @@ A receiver implementation must be located in the a.m. package and it must implem
 
 `public class LbdsRecevierComponent extends IntentService ...`
 
-              
+# Key Exchange Functionality
+
+In order to exchange public Keys for encrypting transport data between SORMAS and LBDS 
+there is a key exchange functionality (kex). 
+
+* Every KEX Intent will contain ONE key when emitted towards a partner
+* Every KEX Reply intent will containt BOTH keys when sent by the requested partner
+
+Example:
+
+* SORMAS emits a LbdsPropagateKexToLbdsIntent will soleley contain the SORMAS public key
+* This intent is consumed by LBDS, the current public key will be replaced
+* LBDS emits a LbdsPropagateKexToSormasIntent, which will contain both keys; the new SORMAS key plus the current LBDS key
+
+## To be done
+
+* Maybe encryption/decryption macro could be embedded into the Request/Response Intent to make encryption more easy
