@@ -9,4 +9,6 @@ public class Constants {
 
     public static final String SORMAS_KEY = "SORMAS_KEY";
 
+    public static final String AES_KEY="AES_KEY";
+
 }
