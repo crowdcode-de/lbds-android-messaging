@@ -4,7 +4,7 @@ import android.content.Intent;
 
 public interface IntentTypeCarrying {
 
-    default IntentType toIntentType(Intent intent) {
+    static IntentType toIntentType(Intent intent) {
         Class<? extends Intent> intentClass = intent.getClass();
         String fullName = intentClass.getName();
         if (fullName.equals(LbdsPropagateKexToSormasIntent.class.getName())) {
@@ -16,5 +16,25 @@ public interface IntentTypeCarrying {
         } else if (fullName.equals(LbdsResponseIntent.class.getName())) {
             return IntentType.HTTP_RESPONSE_INTENT;
         } else return null;
+    }
+
+    static Intent toStrongTypedIntent(Intent intent){
+        Intent result=null;
+        switch (toIntentType(intent)){
+            case HTTP_SEND_INTENT:
+                result = new LbdsSendIntent(intent);
+                break;
+            case HTTP_RESPONSE_INTENT:
+                result = new LbdsSendIntent(intent);
+                break;
+            case KEX_TO_LBDS_INTENT:
+                result = new LbdsPropagateKexToLbdsIntent(intent);
+                break;
+            case KEX_TO_SORMAS_INTENT:
+                result = new LbdsPropagateKexToSormasIntent(intent);
+                break;
+            default:
+        }
+        return result;
     }
 }
