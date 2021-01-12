@@ -2,7 +2,11 @@ package org.hzi.sormas.lbds.messaging;
 
 import android.content.Intent;
 
+import static org.hzi.sormas.lbds.messaging.Constants.INTENT_TYPE;
+
 public interface IntentTypeCarrying {
+
+
 
     static IntentType toIntentType(Intent intent) {
         Class<? extends Intent> intentClass = intent.getClass();
@@ -15,7 +19,12 @@ public interface IntentTypeCarrying {
             return IntentType.HTTP_SEND_INTENT;
         } else if (fullName.equals(LbdsResponseIntent.class.getName())) {
             return IntentType.HTTP_RESPONSE_INTENT;
-        } else return null;
+        } else {
+            final String type = intent.getStringExtra(INTENT_TYPE);
+            if (type == null || type.trim().isEmpty()) {
+                return null;
+            } else return IntentType.valueOf(type);
+        }
     }
 
     static Intent toStrongTypedIntent(Intent intent){
