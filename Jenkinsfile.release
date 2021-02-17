@@ -38,7 +38,7 @@ pipeline {
         }
         stage('trigger jobs') {
             steps {
-               build job: "../lbds-android-messaging/master/", wait: false, propagate: false
+               build job: 'lbds-android-messaging', wait: false
             }
         }
     }
