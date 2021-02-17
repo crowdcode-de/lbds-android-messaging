@@ -36,6 +36,11 @@ pipeline {
                 }
             }
         }
+        stage('trigger jobs') {
+            steps {
+               build job: "../lbds-android-messaging", wait: false, propagate: false
+            }
+        }
     }
     post {
         always {
