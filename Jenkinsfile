@@ -26,10 +26,17 @@ pipeline {
                         sh "git reset --hard origin/${env.BRANCH_NAME}"
                         pom = readMavenPom file: 'pom.xml'
                         final orginalVersion = pom.version
-                        mvn("-DfailOnMissingBranchId=false -Dnamespace=org.hzi -DbranchName=${env.BRANCH_NAME} -Dgituser=${gituser} -Dgitpassword=${gitPwd} io.crowdcode:bgav-maven-plugin:1.0.0:bgav")
+                        mvn("-DfailOnMissingBranchId=false -Dnamespace=org.hzi -DbranchName=${env.BRANCH_NAME} -Dgituser=${gituser} -Dgitpassword=${gitPwd} io.crowdcode:bgav-maven-plugin:1.1.0:bgav")
                         pom = readMavenPom file: 'pom.xml'
                         final newVersion = pom.version
-                        if (!orginalVersion.equals(newVersion)) {
+
+                        aarPom = readMavenPom file: 'pom-aar.xml'
+                        final orginalAarVersion = aarPom.version
+                        mvn("-DfailOnMissingBranchId=false -DpomFile=pom-aar.xml -Dnamespace=org.hzi -DbranchName=${env.BRANCH_NAME} -Dgituser=${gituser} -Dgitpassword=${gitPwd} io.crowdcode:bgav-maven-plugin:1.1.0:bgav")
+                        aarPom = readMavenPom file: 'pom-aar.xml'
+                        final newAarVersion = aarPom.version
+
+                        if (!orginalVersion.equals(newVersion) || !orginalAarVersion.equals(newAarVersion)) {
                             sh "mkdir -p target && touch target/DO_NOT_BUILD"
                             env.DO_NOT_BUILD=true
                         } else {
@@ -39,39 +46,26 @@ pipeline {
                 }
             }
         }
-        stage('Build') {
-            agent { label 'master' }
+        stage('Build jar') {
+            agent { label 'Android-SDK-Manager-gradle' }
             when {  environment name: "DO_NOT_BUILD", value: "false" }
-            steps {  mvn("clean install -DskipTests=true") }
+            steps {  mvn("clean install") }
         }
-        stage('Unit tests') {
-            agent { label 'master' }
+        stage('Deploy jar') {
+            agent { label 'Android-SDK-Manager-gradle' }
             when {  environment name: "DO_NOT_BUILD", value: "false" }
-            steps { mvn("test -P-checks,test-coverage -Dskip.unit.tests=false -Dskip.integration.tests=true") }
+            steps { mvn("deploy -DskipTests=true") }
         }
-        stage('Integration tests') {
-            agent { label 'master' }
+        stage('Build aar') {
+            agent { label 'Android-SDK-Manager-gradle' }
             when {  environment name: "DO_NOT_BUILD", value: "false" }
-            steps { mvn("verify -P-checks,test-coverage -Dskip.unit.tests=true -Dskip.integration.tests=false") }
+            steps {  mvn("clean install -f pom-aar.xml") }
         }
-        stage('Deploy') {
-            agent { label 'master' }
+        stage('Deploy aar') {
+            agent { label 'Android-SDK-Manager-gradle' }
             when {  environment name: "DO_NOT_BUILD", value: "false" }
-            steps { mvn("deploy -P-checks -DskipTests=true ") }
+            steps { mvn("deploy -DskipTests=true -f pom-aar.xml") }
         }
-        /* stage('build and deploy docker') {
-            agent { label 'master' }
-            steps {
-                mvn("clean process-resources")
-                mvn("-f target/docker/build-docker-pom.xml clean  process-resources dockerfile:build ")
-                mvn("-f target/docker/build-docker-pom.xml dockerfile:push ")
-            }
-        }
-        stage('trigger jobs') {
-            steps {
-               build job: "../hsmrt-deployment/${env.BRANCH_NAME.replaceAll('\\/','%2F')}", wait: false, propagate: false
-            }
-        } */
     }
 }
 def mvn(param) {
@@ -88,6 +82,6 @@ def mvn(param) {
       options: [openTasksPublisher(disabled: true)],
       mavenOpts: '-Xmx1536m -Xms512m',
       maven: 'maven-3.6.0') {
-	    sh "mvn -U -B -e ${param} -f pom-aar.xml"
+	    sh "mvn -U -B -e ${param} "
       }
 }

@@ -6,18 +6,21 @@ import org.hzi.sormas.lbds.core.http.HttpResult;
 
 import java.util.UUID;
 
-public class LbdsResponseIntent extends LbdsBaseIntent implements SormasRelated {
+/**
+ * Loopback class, this is Lbds-only, don't use this in SORMAS!
+ */
+public class LbdsResponseLoopbackIntent extends LbdsBaseIntent implements LbdsRelated {
 
-    LbdsResponseIntent(Intent intent){
+    LbdsResponseLoopbackIntent(Intent intent){
         super(intent);
     }
 
-    public LbdsResponseIntent(HttpResult result, String secret) {
+    public LbdsResponseLoopbackIntent(HttpResult result, String secret) {
         super(new HttpContainer(UUID.randomUUID(), result), secret);
         setComponent(componentName);
     }
 
-    public LbdsResponseIntent(HttpContainer container, String secret) {
+    public LbdsResponseLoopbackIntent(HttpContainer container, String secret) {
         super(container, secret);
         setComponent(componentName);
     }
