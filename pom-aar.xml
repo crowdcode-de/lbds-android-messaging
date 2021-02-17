@@ -16,6 +16,7 @@
         <java.lang.level>8</java.lang.level>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <lbds.http.version>1.2.5</lbds.http.version>
     </properties>
 
     <organization>
@@ -76,7 +77,7 @@
         <dependency>
             <groupId>io.crowdcode.sormas.lbds</groupId>
             <artifactId>lbds-http-android</artifactId>
-            <version>1.2.0</version>
+            <version>${lbds.http.version}</version>
             <type>aar</type>
         </dependency>
         <dependency>
