@@ -42,7 +42,7 @@ Inside an Activity or Service
 `LbdsSendIntent sendIntent = new LbdsSendIntent(method);`
 
 ### Fire the intent
-`startService(endIntent);`
+`startService(sendIntent);`
 
 
 # Receiving Data from LBDS 

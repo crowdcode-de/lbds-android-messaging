@@ -34,7 +34,7 @@ public interface IntentTypeCarrying {
                 result = new LbdsSendIntent(intent);
                 break;
             case HTTP_RESPONSE_INTENT:
-                result = new LbdsSendIntent(intent);
+                result = new LbdsResponseIntent(intent);
                 break;
             case KEX_TO_LBDS_INTENT:
                 result = new LbdsPropagateKexToLbdsIntent(intent);
