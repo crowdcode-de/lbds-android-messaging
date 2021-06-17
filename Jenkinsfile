@@ -69,6 +69,6 @@ def mvn(param) {
             options: [openTasksPublisher(disabled: true)],
             mavenOpts: '-Xmx1536m -Xms512m',
             maven: 'maven-3.6.3') {
-        sh "mvn -U -B -e -P linux ${param}"
+        sh "mvn -U -B -e ${param}"
     }
 }
