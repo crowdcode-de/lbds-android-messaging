@@ -15,7 +15,7 @@ pipeline {
         stage('Prepare') {
             steps {
                 withCredentials(
-                        [usernamePassword(credentialsId: 'crowdcodeBitbucket',
+                        [usernamePassword(credentialsId: 'CSchemmy',
                                 usernameVariable: 'gitUser',
                                 passwordVariable: 'gitPwd'
                         )]) {
@@ -64,11 +64,11 @@ pipeline {
     }
 }
 def mvn(param) {
-  withMaven(
-      // globalMavenSettingsConfig: 'GlobalSettingsNexus',
-      options: [openTasksPublisher(disabled: true)],
-      mavenOpts: '-Xmx1536m -Xms512m',
-      maven: 'maven-3.6.3') {
-	    sh "mvn -U -B -e ${param} "
-      }
+    withMaven(
+            // globalMavenSettingsConfig: 'GlobalSettingsNexus',
+            options: [openTasksPublisher(disabled: true)],
+            mavenOpts: '-Xmx1536m -Xms512m',
+            maven: 'maven-3.6.3') {
+        sh "mvn -U -B -e -P linux ${param}"
+    }
 }
