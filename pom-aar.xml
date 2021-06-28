@@ -3,7 +3,7 @@
 
     <groupId>io.crowdcode.sormas.lbds</groupId>
     <artifactId>lbds-android-messaging</artifactId>
-    <version>1.4.4</version>
+    <version>1.4.5</version>
     <packaging>aar</packaging>
 
     <description>LDBS-SORMAS Messaging Objects</description>
@@ -16,7 +16,7 @@
         <java.lang.level>8</java.lang.level>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <lbds.http.version>1.2.5</lbds.http.version>
+        <lbds.http.version>1.2.8</lbds.http.version>
     </properties>
 
     <organization>
@@ -112,7 +112,7 @@
             <id>windows</id>
             <properties>
                 <platform.version>4.0.1.2</platform.version>
-                <android.sdk.path>c:\entwicklung\jdk\android-sdk</android.sdk.path>
+                <android.sdk.path>${user.home}\AppData\Local\Android\Sdk</android.sdk.path>
                 <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
                 <docs.directory>C:/Temp/apidocs</docs.directory>
             </properties>
