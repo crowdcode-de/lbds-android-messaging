@@ -3,7 +3,7 @@
 
     <groupId>io.crowdcode.sormas.lbds</groupId>
     <artifactId>lbds-android-messaging</artifactId>
-    <version>1.4.7-HSLB-228</version>
+    <version>1.4.7-HSLB-229-SNAPSHOT</version>
     <packaging>aar</packaging>
 
     <description>LDBS-SORMAS Messaging Objects</description>
