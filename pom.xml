@@ -3,7 +3,7 @@
 
     <groupId>io.crowdcode.sormas.lbds</groupId>
     <artifactId>lbds-messaging</artifactId>
-    <version>1.4.7-HSLB-228-SNAPSHOT</version>
+    <version>1.4.7-HSLB-228</version>
     <packaging>jar</packaging>
 
     <description>LDBS-SORMAS Messaging Objects</description>
