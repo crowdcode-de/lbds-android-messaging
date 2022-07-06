@@ -3,7 +3,7 @@
 
     <groupId>io.crowdcode.sormas.lbds</groupId>
     <artifactId>lbds-messaging</artifactId>
-    <version>1.4.7-SNAPSHOT</version>
+    <version>1.4.7-HSLB-228-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <description>LDBS-SORMAS Messaging Objects</description>
@@ -16,7 +16,7 @@
         <java.lang.level>8</java.lang.level>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <lbds.http.version>1.2.9</lbds.http.version>
+        <lbds.http.version>1.2.11</lbds.http.version>
     </properties>
 
     <organization>
