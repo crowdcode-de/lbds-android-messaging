@@ -26,4 +26,8 @@ public class LbdsResponseIntent extends LbdsBaseIntent implements SormasRelated 
         final HttpContainer container = getHttpContainer(secret);
         return container.getResult();
     }
+
+    protected LbdsResponseIntent(String encryptedBody) {
+        super(encryptedBody);
+    }
 }

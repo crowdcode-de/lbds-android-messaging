@@ -22,10 +22,17 @@ public class LbdsBaseIntent extends android.content.Intent implements IntentType
         putExtras(intent);
     }
 
+
+
     protected LbdsBaseIntent(HttpContainer container, String secret) {
         super(ACTION_SEND);
         fillIntent(container, secret);
         putExtra(INTENT_TYPE, IntentTypeCarrying.toIntentType(this).toString());
+    }
+
+    protected LbdsBaseIntent(String encryptedBody) {
+        super(ACTION_SEND);
+        putExtra(HTTP_CONTAINER, encryptedBody);
     }
 
 
